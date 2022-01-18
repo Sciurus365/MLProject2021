@@ -15,8 +15,8 @@ class Note:
     note: int = 0  # The pitch
     octave: int = 0  # The (Midi) octave
     rest: int = 0  # Whether the note is a rest
-    duration: int = 0  # Just for MIDI conversion
-    time: int = 0  # Just for MIDI conversion
+    duration: float = 0  # Just for MIDI conversion
+    time: float = 0  # Just for MIDI conversion
     generated: bool = False
 
     def to_3d(self):
@@ -88,20 +88,21 @@ all_notes = notes + midi_notes
 
 midi_notes_duration = []
 cur = all_notes[0]
+cur.duration = 0.125
 
 for t, mn in enumerate(all_notes[1:]):
     if cur.note == mn.note and cur.octave == mn.octave:
-        cur.duration += 1 / 16
+        cur.duration += 0.125
     else:
         midi_notes_duration.append(cur)
-        cur = Note(mn.note, mn.octave, mn.rest, 1 / 16, t * (1 / 16),
+        cur = Note(mn.note, mn.octave, mn.rest, 0.125, (t + 1) * (0.125),
                    mn.generated)
 
 midi_notes_duration.append(cur)
 
 # Generate midi file
 midi = midiutil.MIDIFile(1)
-midi.addTempo(0, 0, 60)
+midi.addTempo(0, 0, 120)
 
 seen_generated = False
 
