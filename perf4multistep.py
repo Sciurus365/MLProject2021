@@ -221,7 +221,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import r2_score
 
-y_test = voice_test
+y_test = test_notes
 y_pred = dfV1_pred.tail(num_predict)['note']
 
 # Plot
