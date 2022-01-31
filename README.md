@@ -1,7 +1,9 @@
 # MLProject2021
 
-Files in this repository:
+Outputs from `MultiStep2.ipynb`:
 
-- `midi.ipynb`: python script to create midi files from the original txt input format; output: `F.mid`
-- `RidgeClassifier.ipynb`: a simple prototype with RidgeClassifier; not under development but might be useful
-- `MultiStep.ipynb`: using multistep strategy to predict multiple outcome features; output: `pred_stoc2.mid`
+- `original.mid`: The original data (F.txt), only the lowest voice.
+- `pred.mid`: The original (F.txt) plus its predictions, only the lowest voice. (You may compare this with `original.mid` to see when the prediction starts.)
+- `twinkle_pred.mid`: The twinkle.txt data plus its predictions, only the 0th (first column).
+- `original_all_voices.mid`: The original data (F.txt), all voices. *Not used in the report.*
+- `pred_all_voices.mid`: The original (F.txt) plus its predictions, all voices. These voices were predicted separately. *Not used in the report.*
