@@ -47,10 +47,6 @@ midi_input = piano_input.where(piano_input == 0, piano_input + 20)
 # Take the voice we are working on
 voice_input = midi_input.iloc[:, VOICE]
 
-# Split train and test data set
-voice_test = voice_input.iloc[-num_predict:]
-voice_input = voice_input.drop(voice_input.tail(num_predict).index)
-
 # Create an output dataframe
 notes = []
 # Process the first note
@@ -293,10 +289,6 @@ piano_input = pd.read_csv('twinkle.txt', sep='\t', header=None)
 midi_input = piano_input.where(piano_input == 0, piano_input - 12)
 # Take the voice we are working on
 voice_input = midi_input.iloc[:, VOICE]
-
-# Split train and test data set
-# voice_test = voice_input.iloc[-num_predict:]
-# voice_input = voice_input.drop(voice_input.tail(num_predict).index)
 
 # Create an output dataframe
 notes = []
