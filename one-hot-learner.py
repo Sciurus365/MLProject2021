@@ -6,7 +6,7 @@ import midiutil
 
 # Options for creating the dataframe.
 # VOICE = which voice to pick, LAG = how many periods to lag for.
-VOICE = 0
+VOICE = 1
 LAG = 128  # 128 time units ≈ 8 seconds
 S_PREDICT = 20  # How many seconds to predict
 
@@ -89,15 +89,16 @@ reshaped = array_rep.reshape((n, nx * ny * nz))
 X = reshaped
 for lag in range(1, LAG + 1):
     to_append = reshaped[lag:]  # Get the notes starting at index `lag`
-    l, _ = X.shape
-    X = np.delete(X, l - 1, axis=0)  # Delete last row
+    X = np.delete(X, n - lag, axis=0)  # Delete last row
     X = np.append(X, to_append, axis=1)  # Add lagged column
 
+# Remove column with y
+X = np.delete(X, np.s_[0:(nx * ny * nz)], axis=1)
+
 y = reshaped
-reg = RidgeCV(alphas=[1e-3, 1e-2, 1e-1, 1],
-              fit_intercept=False).fit(X=X, y=y[:-lag])
+reg = RidgeCV(alphas=[1e-3, 1e-2, 1e-1, 1]).fit(X=X, y=y[:-lag])
 print(
-    f"Cross-validated ridge regression finished. Score: {reg.score(X, y[:-lag])}"
+    f"Cross-validated ridge regression finished. Score: {reg.score(X, y[:-lag])}; alpha: {reg.alpha_}"
 )
 
 num_predict = S_PREDICT * 8
@@ -106,12 +107,12 @@ for i in range(num_predict):
     
     # Predict next note
     next_note = reg.predict(X=X[-lag:])
-    next_note = next_note.reshape((lag, nx, ny, nz))[0]
+    next_note = next_note.reshape((lag, nx, ny, nz))[-1]
 
     # Create new lagged row
-    next_row = X[-1:, :].reshape((lag + 1, nx, ny, nz))
+    next_row = X[-1].reshape((lag, nx, ny, nz))
     next_row[0] = next_note
-    next_row = next_row.reshape(1, (lag + 1) * nx * ny * nz)
+    next_row = next_row.reshape(1, lag * nx * ny * nz)
     # Append new row
     X = np.append(X, next_row, axis=0)
 print()
@@ -122,7 +123,7 @@ next_notes = X[-num_predict:, :(nx * ny * nz)].reshape(num_predict, nx, ny, nz)
 midi_notes = [Note.from_3d(arr) for arr in next_notes]
 
 # Combine original score with predicted notes
-all_notes = notes + midi_notes
+all_notes = midi_notes
 
 # Settings for midi generation
 note_len = 0.25
