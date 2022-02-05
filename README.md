@@ -10,5 +10,6 @@ Outputs from `MultiStep2.ipynb`:
 
 Sth for results:
 - `p4Chain.py`: add split methods for test and train set, and generate both regression outputs for all data used and only train data used
+- `p4multi.py`: the same as above
 - `Performance.rmd`: calculate piano format output for both methods and make plots
-- `calculate_statistics`: using python to calculate statistics parameteres
+- `statistics_calculation.py`: using python to calculate statistics parameteres
