@@ -20,5 +20,5 @@ Outputs from `multiple_voice_prediction.ipynb`:
 Performance results:
 - `p4Chain.py`: add split methods for test and train set, and generate both regression outputs for all data used and only train data used
 - `p4multi.py`: the same as above
-- `Performance.rmd`: calculate piano format output for both methods and make plots
+- `Performance.rmd`: calculate piano format output for both algorithms and make plots
 - `statistics_calculation.py`: calculate statistics parameteres
