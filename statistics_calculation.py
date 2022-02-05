@@ -57,7 +57,7 @@ R2 = r2_score(y_test,y_pred)
 print("R2 = ", R2)
 
 # # for voice 1 by m
-y_pred = m_train['V1']
+y_pred = m_train['v1']
 
 MSE = mean_squared_error(y_test,y_pred)
 print("Following are for voice 1 by m")
@@ -68,7 +68,7 @@ R2 = r2_score(y_test,y_pred)
 print("R2 = ", R2)
 
 # # for voice 2 by m
-y_pred = m_train['V2']
+y_pred = m_train['v2']
 
 MSE = mean_squared_error(y_test,y_pred)
 print("Following are for voice 2 by m")
@@ -79,7 +79,7 @@ R2 = r2_score(y_test,y_pred)
 print("R2 = ", R2)
 
 # # for voice 3 by m
-y_pred = m_train['V3']
+y_pred = m_train['v3']
 
 MSE = mean_squared_error(y_test,y_pred)
 print("Following are for voice 3 by m")
@@ -90,7 +90,7 @@ R2 = r2_score(y_test,y_pred)
 print("R2 = ", R2)
 
 # # for voice 4 by m
-y_pred = m_train['V4']
+y_pred = m_train['v4']
 
 MSE = mean_squared_error(y_test,y_pred)
 print("Following are for voice 4 by m")

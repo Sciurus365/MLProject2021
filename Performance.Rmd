@@ -49,6 +49,7 @@ load data for multistep:
 ## V0
 m_all_0 <- read.delim("m_all_0.txt", sep = "", header = FALSE)
 m_all_0[5] <- m_all_0[1] + m_all_0[2]*12
+m_all_0 <- tail(m_all_0, 100)
 
 m_all_v0 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_all_0)
@@ -58,9 +59,12 @@ rep <- as.data.frame(rep(m_all_0[i,5], m_all_0[i,4]))
 m_all_v0 <- rbind(m_all_v0, rep)
 }
 
+m_all_v0 <- head(m_all_v0, 133)
+
 ## V1
 m_all_1 <- read.delim("m_all_1.txt", sep = "", header = FALSE)
 m_all_1[5] <- m_all_1[1] + m_all_1[2]*12
+m_all_1 <- tail(m_all_1, 100)
 
 m_all_v1 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_all_1)
@@ -70,9 +74,12 @@ rep <- as.data.frame(rep(m_all_0[i,5], m_all_1[i,4]))
 m_all_v1 <- rbind(m_all_v1, rep)
 }
 
+m_all_v1 <- head(m_all_v1, 133)
+
 ## V2
 m_all_2 <- read.delim("m_all_2.txt", sep = "", header = FALSE)
 m_all_2[5] <- m_all_2[1] + m_all_2[2]*12
+m_all_2 <- tail(m_all_2, 100)
 
 m_all_v2 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_all_2)
@@ -82,9 +89,12 @@ rep <- as.data.frame(rep(m_all_2[i,5], m_all_2[i,4]))
 m_all_v2 <- rbind(m_all_v2, rep)
 }
 
+m_all_v2 <- head(m_all_v2, 133)
+
 ## V3
 m_all_3 <- read.delim("m_all_3.txt", sep = "", header = FALSE)
 m_all_3[5] <- m_all_3[1] + m_all_3[2]*12
+m_all_3 <- tail(m_all_3, 100)
 
 m_all_v3 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_all_3)
@@ -94,17 +104,18 @@ rep <- as.data.frame(rep(m_all_3[i,5], m_all_3[i,4]))
 m_all_v3 <- rbind(m_all_v3, rep)
 }
 
+m_all_v3 <- head(m_all_v3, 133)
+
 ## combine
-m_all <- as.data.frame(cbind(m_all_v0[3825:3957,],
-               m_all_v1[3825:3957,],
-               m_all_v2[3825:3957,],
-               m_all_v3[3825:3957,])) 
+m_all <- as.data.frame(cbind(m_all_v0, m_all_v1, m_all_v2, m_all_v3)) 
+colnames(m_all) <- c('v1', 'v2', 'v3', 'v4')
 
 
 # predicted by train set
 ## V0
 m_train_0 <- read.delim("m_pre_0.txt", sep = "", header = FALSE)
 m_train_0[5] <- m_train_0[1] + m_train_0[2]*12
+m_train_0 <- tail(m_train_0, 100)
 
 m_train_v0 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_train_0)
@@ -114,9 +125,12 @@ rep <- as.data.frame(rep(m_train_0[i,5], m_train_0[i,4]))
 m_train_v0 <- rbind(m_train_v0, rep)
 }
 
+m_train_v0 <- head(m_train_v0, 133)
+
 ## V1
 m_train_1 <- read.delim("m_pre_1.txt", sep = "", header = FALSE)
 m_train_1[5] <- m_train_1[1] + m_train_1[2]*12
+m_train_1 <- tail(m_train_1, 100)
 
 m_train_v1 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_train_1)
@@ -126,9 +140,12 @@ rep <- as.data.frame(rep(m_train_0[i,5], m_train_1[i,4]))
 m_train_v1 <- rbind(m_train_v1, rep)
 }
 
+m_train_v1 <- head(m_train_v1, 133)
+
 ## V2
 m_train_2 <- read.delim("m_pre_2.txt", sep = "", header = FALSE)
 m_train_2[5] <- m_train_2[1] + m_train_2[2]*12
+m_train_2 <- tail(m_train_2, 100)
 
 m_train_v2 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_train_2)
@@ -138,9 +155,12 @@ rep <- as.data.frame(rep(m_train_2[i,5], m_train_2[i,4]))
 m_train_v2 <- rbind(m_train_v2, rep)
 }
 
+m_train_v2 <- head(m_train_v2, 133)
+
 ## V3
 m_train_3 <- read.delim("m_pre_3.txt", sep = "", header = FALSE)
 m_train_3[5] <- m_train_3[1] + m_train_3[2]*12
+m_train_3 <- tail(m_train_3, 100)
 
 m_train_v3 <- as.data.frame(matrix(nrow=0,ncol=1))
 rrange <- 1: nrow(m_train_3)
@@ -150,11 +170,11 @@ rep <- as.data.frame(rep(m_train_3[i,5], m_train_3[i,4]))
 m_train_v3 <- rbind(m_train_v3, rep)
 }
 
+m_train_v3 <- head(m_train_v3, 133)
+
 ## combine
-m_train <- as.data.frame(cbind(m_all_v0[3692:3824, ],
-               m_all_v1[3692:3824, ],
-               m_all_v2[3692:3824, ],
-               m_all_v3[3692:3824, ])) 
+m_train <- as.data.frame(cbind(m_train_v0, m_train_v1, m_train_v2, m_train_v3)) 
+colnames(m_train) <- c('v1', 'v2', 'v3', 'v4')
 
 head(m_train)
 ```
@@ -188,9 +208,10 @@ par(mar=c(5.1, 4.1, 4.1, 15.1), xpd=TRUE)
 ## make a plot
 plot(original_end$V1, ty="l", main = 'Prediction of the last 133 notes for voice 1',
      xlab = 'Note number', ylab = 'Note', 
+     ylim = c(0,80),
      col = 'red')
 lines(cr_predbytrain$V1, col = 'blue')
-lines(m_train$V1, col = 'green')
+lines(m_train$v1, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Original music', 'Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -211,7 +232,7 @@ plot(original_end$V2, ty="l", main = 'Prediction of the last 133 notes for voice
      ylim = c(0,70),
      col = 'red')
 lines(cr_predbytrain$V2, col = 'blue')
-lines(m_train$V2, col = 'green')
+lines(m_train_v2, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Original music', 'Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -229,7 +250,7 @@ plot(original_end$V3, ty="l", main = 'Prediction of the last 133 notes for voice
      ylim = c(0,65),
      col = 'red')
 lines(cr_predbytrain$V3, col = 'blue')
-lines(m_train$V3, col = 'green')
+lines(m_train$v3, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Original music', 'Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -247,7 +268,7 @@ plot(original_end$V4, ty="l", main = 'Prediction of the last 133 notes for voice
      ylim = c(0,60),
      col = 'red')
 lines(cr_predbytrain$V4, col = 'blue')
-lines(m_train$V4, col = 'green')
+lines(m_train$v4, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Original music', 'Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -266,7 +287,7 @@ plot(cr_prebyall$V1, ty="l", main = 'Prediction of next 133 notes for voice 1',
      xlab = 'Note number', ylab = 'Note', 
      ylim = c(0,75),
      col = 'blue')
-lines(m_all$V1, col = 'green')
+lines(m_all$v1, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -283,7 +304,7 @@ plot(cr_prebyall$V2, ty="l", main = 'Prediction of next 133 notes for voice 2',
      xlab = 'Note number', ylab = 'Note', 
      ylim = c(0,75),
      col = 'blue')
-lines(m_all$V2, col = 'green')
+lines(m_all$v2, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -301,7 +322,7 @@ plot(cr_prebyall$V3, ty="l", main = 'Prediction of next 133 notes for voice 3',
      xlab = 'Note number', ylab = 'Note', 
      ylim = c(0,75),
      col = 'blue')
-lines(m_all$V3, col = 'green')
+lines(m_all$v3, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
@@ -319,13 +340,20 @@ plot(cr_prebyall$V4, ty="l", main = 'Prediction of next 133 notes for voice 4',
      xlab = 'Note number', ylab = 'Note', 
      ylim = c(0,60),
      col = 'blue')
-lines(m_all$V4, col = 'green')
+lines(m_all$v4, col = 'green')
 
 legend('topright', inset=c(-0.75,0.2), cex = 0.8,
        legend=c('Prediciton by Chained-regression', 'Prediction by Step-wise classifier'),
        col=c('blue', 'green'), lty = 1,
        pch=c(NA, NA), merge=TRUE)
 ```
+
+
+
+
+
+
+
 
 
 
